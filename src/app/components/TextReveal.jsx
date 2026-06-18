@@ -1,5 +1,5 @@
 "use client"
-import { forwardRef, useRef } from "react";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 import gsap, { ScrollTrigger, SplitText, useGSAP } from "../libs/gsap";
 
 
@@ -17,6 +17,12 @@ const TextReveal = forwardRef(({
     const wrapperRef = useRef(null);
     const splitRef = useRef(null);
     const tlRef = useRef(null);
+
+    useImperativeHandle(ref,()=>({
+        play:()=> tlRef.current?.play(),
+        reverse:()=> tlRef.current?.reverse(),
+        pause:()=> tlRef.current?.pause(0),
+    }))
 
     useGSAP(()=>{
       
@@ -47,6 +53,7 @@ const TextReveal = forwardRef(({
                 from:'start'
             }
         })
+
          
         if(trigger === "mount"){
             tlRef.current.play();
