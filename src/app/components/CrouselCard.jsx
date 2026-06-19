@@ -1,27 +1,59 @@
 import React, { useRef } from "react";
 import TextReveal from "./TextReveal";
+import gsap from "../libs/gsap";
 
-const CARD_W = 200;
-const CARD_H = 280;
+const CARD_W = 300;
+const CARD_H = 380;
 const SCALE = 1.35;
 
-const CrouselCard = ({ project }) => {
+const CrouselCard = ({ project,onHoverStart,onHoverEnd }) => {
   const cardRef = useRef(null);
   const imgRef = useRef(null);
   const numberRef = useRef(null);
   const titleRef = useRef(null);
   const imageRef = useRef(null);
 
+  const onEnter = ()=>{
+    onHoverStart?.();
+
+    gsap.to(cardRef.current,{
+      width:CARD_W * SCALE,
+      height:CARD_H * SCALE,
+      duration:0.45,
+      ease: "power3.out",
+
+    })
+    numberRef.current?.play();
+    titleRef.current?.play();
+  }
+
+    const onLeave = ()=>{
+    onHoverEnd?.();
+
+    gsap.to(cardRef.current,{
+      width:CARD_W,
+      height:CARD_H,
+      duration:0.4,
+      ease: "power3.out",
+
+    })
+    numberRef.current?.reverse();
+    titleRef.current?.reverse();
+  }
+
+
   return (
-    <div
+    <div 
+    onMouseEnter={onEnter}
+    onMouseLeave={onLeave}
       ref={cardRef}
       className="relative "
       style={{
         width: CARD_W,
         height: CARD_H,
         flexShrink: 0,
-        overflow: visible,
-        cursor: pointer,
+        overflow: "visible",
+        cursor: "pointer",
       }}
     >
       <div
