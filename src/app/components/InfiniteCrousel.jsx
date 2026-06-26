@@ -39,7 +39,7 @@ const infiniteCrousel = ({projects}) => {
     const doubled = [...projects,...projects];
 
   return (
-    <div style={{padding: `${TRACK_H * 0.2}px 0 24px`}} className="overflow-hidden">
+    <div style={{padding: `${TRACK_H * 0.1}px 0 24px`}} className="overflow-hidden">
         <div ref={trackRef} style={{gap:`${CARD_GAP}px`, width:'max-content', height:`${TRACK_H}px`}} className="track flex items-center">
             {
                 doubled.map((project,i)=>{
