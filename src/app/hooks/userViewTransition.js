@@ -66,7 +66,7 @@ const userViewTransition = () => {
               scaleX:0,
               duration:0.7,
               ease:'power3.inOut',
-              delay:0.12,
+              delay:1,
               stagger:0.05,
               transformOrigin:'right',
               onComplete:removerOverlay
